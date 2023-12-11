@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/plantilla :: head"></head>
+
+<body>
+        <nav th:replace="layout/plantilla :: nav"></nav>
+
+    <div class="contenido"> 
+               <br>
+<br>
+
+        <!-- Add New Pais Form -->
+        <h3>Agregar Nuevo Pais</h3>
+        <form th:action="@{/paises/agregar}" method="post">
+            <label for="descripcion">Descripción:</label>
+            <input type="text" id="descripcion" name="descripcion" required>
+            
+            <label for="activo">Activo:</label>
+            <input type="checkbox" id="activo" name="activo" checked>
+            
+            <button type="submit">Agregar Pais</button>
+        </form>
+
+        <!-- Display Existing Paises -->
+               <br>
+<br>
+         <h2>Listado de Paises</h2>
+        <table class="table">
+            <!-- Table Header -->
+            <thead>
+                <tr>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Activo</th>
+                    <th scope="col">Modificar</th>
+                    <th scope="col">Eliminar</th>
+                </tr>
+            </thead>
+
+            <!-- Table Body -->
+            <tbody>
+                <tr th:each="pais : ${paises}">
+                    <!-- Display Existing Paises Data -->
+                    <td th:text="${pais.descripcion}"></td>
+                    <td>
+                        <input type="checkbox" name="activo" th:checked="${pais.activo}" disabled />
+                    </td>
+                    <td>
+                        <a th:href="@{/paises/modificar/}+ ${pais.idPaises}">Modificar</a>
+                    </td>
+                    <td>
+<form th:action="@{/paises/eliminar/{id}(id=${pais.idPaises})}" method="post">
+    <input type="hidden" name="_method" value="delete"/>
+    <button type="submit">Eliminar</button>
+</form>                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Message for Empty List -->
+        <div th:if="${paises == null or paises.empty}">
+            No tenemos lista de paises que mostrar...
+        </div>
+    </div> 
+    <!-- footer th:replace="layout/plantilla :: footer"-->
+</body>
+
+</html>

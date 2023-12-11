@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head th:replace="layout/plantilla :: head"></head>
+<body>
+
+
+    <div class="container mt-3">
+        <h1>Welcome to Aerolinea</h1>
+        <p>This is the home page of the Aerolinea application.</p>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Boletos</h5>
+                        <p class="card-text">Explore and manage flight tickets.</p>
+                        <a th:href="@{/boletos/nuevo}" class="btn btn-primary">Go to Boletos</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Clientes</h5>
+                        <p class="card-text">Manage customer information.</p>
+                        <a th:href="@{/clientes/nuevo}" class="btn btn-primary">Go to Clientes</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Paises</h5>
+                        <p class="card-text">View and manage country information.</p>
+                        <a th:href="@{/paises/nuevo}" class="btn btn-primary">Go to Paises</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- footer th:replace="layout/plantilla :: footer"-->
+
+</body>
+</html>

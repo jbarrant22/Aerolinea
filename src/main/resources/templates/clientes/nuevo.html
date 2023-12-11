@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/plantilla :: head"></head>
+
+<body>
+    <nav th:replace="layout/plantilla :: nav"></nav>
+
+    <div class="contenido">
+        <br>
+        <br>
+
+        <!-- Add New Cliente Form -->
+        <h3>Agregar Nuevo Cliente</h3>
+        <form th:action="@{/clientes/agregar}" method="post">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" name="apellidos" required>
+
+            <label for="correo">Correo:</label>
+            <input type="text" id="correo" name="correo" required>
+
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" name="telefono">
+
+            <label for="nacionalidad">Nacionalidad:</label>
+            <input type="text" id="nacionalidad" name="nacionalidad">
+
+            <label for="fechaDeNacimiento">Fecha de Nacimiento:</label>
+            <input type="date" id="fechaDeNacimiento" name="fechaDeNacimiento">
+
+            <label for="pasaporte">Pasaporte:</label>
+            <input type="text" id="pasaporte" name="pasaporte">
+
+            <label for="contraseña">Contraseña:</label>
+            <input type="password" id="contraseña" name="contraseña" required>
+
+            <button type="submit">Agregar Cliente</button>
+        </form>
+
+        <!-- Display Existing Clientes -->
+        <br>
+        <br>
+        <h2>Listado de Clientes</h2>
+        <table class="table">
+            <!-- Table Header -->
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Nacionalidad</th>
+                    <th scope="col">Fecha de Nacimiento</th>
+                    <th scope="col">Pasaporte</th>
+                    <th scope="col">Contraseña</th>
+                    <th scope="col">Modificar</th>
+                    <th scope="col">Eliminar</th>
+                </tr>
+            </thead>
+
+            <!-- Table Body -->
+            <tbody>
+                <tr th:each="cliente : ${clientes}">
+                    <!-- Display Existing Clientes Data -->
+                    <td th:text="${cliente.nombre}"></td>
+                    <td th:text="${cliente.apellidos}"></td>
+                    <td th:text="${cliente.correo}"></td>
+                    <td th:text="${cliente.telefono}"></td>
+                    <td th:text="${cliente.nacionalidad}"></td>
+                    <td th:text="${#dates.format(cliente.fechaDeNacimiento, 'yyyy-MM-dd')}"></td>
+                    <td th:text="${cliente.pasaporte}"></td>
+                    <td th:text="${cliente.contraseña}"></td>
+                    <td>
+                        <a th:href="@{/clientes/modificar/}+ ${cliente.idClientes}">Modificar</a>
+                    </td>
+                    <td>
+                        <form th:action="@{/clientes/eliminar/{id}(id=${cliente.idClientes})}" method="post">
+                            <input type="hidden" name="_method" value="delete" />
+                            <button type="submit">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Message for Empty List -->
+        <div th:if="${clientes == null or clientes.empty}">
+            No tenemos lista de clientes que mostrar...
+        </div>
+    </div>
+    <!-- footer th:replace="layout/plantilla :: footer"-->
+</body>
+
+</html>
