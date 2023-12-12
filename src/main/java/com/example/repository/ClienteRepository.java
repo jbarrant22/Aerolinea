@@ -7,10 +7,7 @@ package com.example.repository;
 import com.example.domain.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-/**
- *
- * @author vse10
- */
+
 public interface ClienteRepository extends JpaRepository<Cliente,Integer>{
     
 }
